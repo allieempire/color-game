@@ -5,6 +5,10 @@ var colorDisplay = document.getElementById("colorDisplay");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+
+colorDisplay.textContent = pickedColor;
 
 resetButton.addEventListener("click", function(){
 	//Generate new colors
@@ -20,7 +24,24 @@ resetButton.addEventListener("click", function(){
 	h1.style.backgroundColor = "#232323";
 });
 
-colorDisplay.textContent = pickedColor;
+easyButton.addEventListener("click", function(){
+	easyButton.classList.add("selected");
+	hardButton.classList.remove("selected");
+	colors = generateRandomColors(3);
+	pickedColor = pickColor();
+	colorDisplay.textContent = pickedColor;
+	for (i = 0; i < squares.length; i++) {
+		if (colors[i]) {
+			squares[i].style.backgroundColor = colors[i];
+		}
+	}
+})
+
+hardButton.addEventListener("click", function(){
+	easyButton.classList.remove("selected");
+	hardButton.classList.add("selected");
+})
+
 
 for (i = 0; i < squares.length; i++) {
 	//Add initial color to squares
